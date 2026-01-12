@@ -1,0 +1,106 @@
+/* Main Dark Theme */
+:root {
+  --bg-color: #0d1117;
+  --text-color: #c9d1d9;
+  --accent-color: #238636;
+  --card-bg: #161b22;
+  --border-color: #30363d;
+  --code-font: "Consolas", "Monaco", monospace;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; }
+h2 { font-size: 1.5rem; margin-top: 30px; margin-bottom: 15px; color: #58a6ff; }
+h3 { font-size: 1.2rem; margin-top: 25px; margin-bottom: 10px; color: #79c0ff; }
+a { color: #58a6ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { padding-left: 20px; }
+li { margin-bottom: 5px; }
+pre {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+code {
+  font-family: var(--code-font);
+  background-color: rgba(110, 118, 129, 0.4);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 85%;
+}
+pre code {
+  background-color: transparent;
+  padding: 0;
+  font-size: 100%;
+}
+blockquote {
+  border-left: 4px solid var(--border-color);
+  padding-left: 15px;
+  color: #8b949e;
+  margin: 0;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+th, td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: left;
+}
+th { background-color: var(--card-bg); }
+footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #8b949e;
+}
+
+/* Custom classes adaptation */
+.info-box, .concept-box {
+    background-color: rgba(56, 139, 253, 0.15);
+    border-left: 5px solid #1f6feb;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.highlight {
+    background-color: rgba(210, 153, 34, 0.4); /* yellow-ish transparency */
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #e3b341;
+}
+.tag-compute {
+    display: inline-block;
+    background: rgba(56, 139, 253, 0.2);
+    color: #58a6ff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid rgba(56, 139, 253, 0.4);
+}
+.tag-memory {
+    display: inline-block;
+    background: rgba(248, 81, 73, 0.2);
+    color: #f85149;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid rgba(248, 81, 73, 0.4);
+}

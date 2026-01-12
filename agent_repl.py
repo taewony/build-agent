@@ -3,6 +3,7 @@ import os
 import glob
 import time
 import sys
+import convert_md_to_html
 
 # 설정
 MODEL_NAME = "gemma3:4b"  
@@ -75,10 +76,12 @@ def main_repl():
     
     def print_help():
         print("명령어:")
-        print("  summary docs : ./docs 폴더 내 파일 요약 수행")
-        print("  save answer  : 메모리에 있는 결과를 answer.md로 저장")
-        print("  help         : 명령어 목록 보기")
-        print("  exit         : 종료")
+        print("  summary docs   : ./docs 폴더 내 파일 요약 수행")
+        print("  save answer    : 메모리에 있는 결과를 answer.md로 저장")
+        print("  md2html <path> : 특정 md 파일을 html로 변환")
+        print("                   (예: md2html playbook/example.md -> example.html)")
+        print("  help           : 명령어 목록 보기")
+        print("  exit           : 종료")
 
     print(f"--- AI Agent REPL ({MODEL_NAME}) ---")
     print_help()
@@ -120,6 +123,15 @@ def main_repl():
                         print(f"[System] 현재 폴더에 'answer.md' 파일로 저장했습니다.")
                     except Exception as e:
                         print(f"[Error] 파일 저장 실패: {e}")
+            
+            # 5) MD to HTML 변환
+            elif user_input.startswith("md2html "):
+                md_path = user_input.replace("md2html ", "").strip()
+                try:
+                    html_path = convert_md_to_html.convert_single_file(md_path)
+                    print(f"[System] Converted '{md_path}' -> '{html_path}'")
+                except Exception as e:
+                    print(f"[Error] 변환 실패: {e}")
 
             # 그 외 입력
             else:
