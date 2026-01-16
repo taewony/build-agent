@@ -4,7 +4,7 @@ import sys
 import litellm
 from typing import Dict, Any, Optional
 from .semantic_kernel import Handler, Effect
-from .effects import Generate, ExecuteCode, ReadFile, WriteFile, Recurse, LLMRequest, Math
+from .effects import Generate, ExecuteCode, ReadFile, WriteFile, Recurse, LLMRequest, Math, Listen, Reply
 
 # Safe Execution Imports (from recursive-llm wisdom)
 from RestrictedPython import compile_restricted_exec, safe_globals, limited_builtins, utility_builtins
@@ -105,4 +105,18 @@ class MathHandler(Handler):
             if op == "mul": return a * b
             if op == "div": return a / b if b != 0 else float('inf')
             raise ValueError(f"Unknown operation: {op}")
+        raise NotImplementedError
+
+class UserInteractionHandler(Handler):
+    def __init__(self, input_queue: Optional[list] = None):
+        self.input_queue = input_queue or []
+
+    def handle(self, effect: Effect) -> Any:
+        if isinstance(effect, Listen):
+            if self.input_queue:
+                return self.input_queue.pop(0)
+            return "User provided no input (Mock)"
+        if isinstance(effect, Reply):
+            print(f"AGENTS SAYS: {effect.payload.message}")
+            return "Replied"
         raise NotImplementedError

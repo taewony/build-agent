@@ -34,7 +34,7 @@ To evaluate the efficacy of the spec-driven approach, we propose an **Agent Curr
 | **0** | **Static Responder** | `function` (Input $\\to$ Output) | ✅ **Completed** |
 | **1** | **Context-Aware Bot** | `state` (History/Memory) | ✅ **Completed** |
 | **2** | **Tool-Use Agent** | `effect` (External API/REPL) | 🚧 In Progress |
-| **3** | **Planning Agent** | `workflow` (Loop/Condition) | 📅 Planned |
+| **3** | **Planning Agent** | `workflow` (Loop/Condition) | ✅ **Completed** |
 | **4** | **Multi-Agent System**| `composition` (Shared Space) | 📅 Planned |
 | **5** | **Self-Improving** | `meta-build` (Self-Recursion) | 📅 Planned |
 

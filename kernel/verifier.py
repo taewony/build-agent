@@ -5,7 +5,7 @@ import yaml
 from typing import List, Dict, Any, Optional
 from .compiler import SystemSpec, ComponentSpec, FunctionSpec
 from .runtime import Runtime
-from .handlers import LiteLLMHandler, MathHandler
+from .handlers import LiteLLMHandler, MathHandler, UserInteractionHandler
 import kernel.semantic_kernel as sk
 
 class StaticVerifier:
@@ -47,11 +47,12 @@ class DynamicVerifier:
         errors = []
         print(f"\n[Dynamic Analysis] Running tests from: {test_file}")
         
-        # Setup Runtime for Side Effects (LLM, Math)
+        # Setup Runtime for Side Effects (LLM, Math, User)
         runtime = Runtime()
         # Use a smaller/faster model for testing if possible, or same as builder
         runtime.register_handler(LiteLLMHandler(default_model="ollama/qwen2.5-coder:7b"))
         runtime.register_handler(MathHandler())
+        runtime.register_handler(UserInteractionHandler(input_queue=["Hello", "Yes", "Goodbye"])) # Mock inputs
         sk._active_runtime = runtime
         
         try:

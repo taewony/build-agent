@@ -28,7 +28,7 @@
     - **Level 0 (Static):** Implement `StaticResponder` (Input -> Output).
     - **Level 1 (Context):** Implement `ContextAwareBot` (State: History).
     - **Level 2 (Tool Use):** Implement `CalculatorAgent` (Effect: ToolCall). ✅ **Completed**
-    - **Level 3 (Planning):** Implement `CoachingAgent` (Workflow: Plan -> Act).
+    - **Level 3 (Planning):** Implement `CoachingAgent` (Workflow: Plan -> Act). ✅ **Completed**
     - **Level 4 (Multi-Agent):** Implement `TeamCoordinator` (System composition).
 - **Paper Argument:** "SPAK allows students to transition from Level N to N+1 by simply adding semantic constructs (e.g., adding `state` or `effects`) to the spec, whereas traditional coding requires massive refactoring."
 
@@ -78,6 +78,6 @@ To support the above curriculum, the Kernel needs specific enhancements.
 
 ## Part 3. Immediate Next Steps
 
-1.  **Refactor Compiler:** Update `kernel/compiler.py` to support the v0.4 syntax defined in `whitepaper/AgentSpec.md`.
+1. [x] Refactor Compiler: Update `kernel/compiler.py` to support the v0.4 syntax defined in `whitepaper/AgentSpec.md`.
 2. [x] Implement Level 0-1: Created `specs/SPEC.level0.md` and `specs/SPEC.level1.md` and verified they build correctly.
 3.  **Paper Draft:** Update `docs/paper.md` with the new "Educational" positioning and Formal definitions.

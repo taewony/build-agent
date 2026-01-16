@@ -11,9 +11,11 @@ meta_def: "meta" "{" meta_field* "}"
 meta_field: NAME "=" STRING
 
 system_def: "system" NAME "{" component_def* "}"
+          | "kernel" NAME "{" component_def* "}"
 
 component_def: 
     | "component" NAME "{" member_def* "}" -> component_block
+    | "component" NAME                     -> component_decl
     | "effect" NAME "{" effect_op* "}"     -> effect_block
     | "workflow" NAME "(" param_list ")" "{" workflow_step* "}" -> workflow_def
     | "import" NAME                        -> import_stmt
@@ -25,6 +27,7 @@ member_def:
     | "function" NAME "(" param_list ")" "->" type_ref func_body -> function_def_body
     | "invariant" ":" logic_expr ";"?       -> invariant
     | "constraint" ":" logic_expr ";"?      -> constraint
+    | "workflow" NAME "(" param_list ")" "{" workflow_step* "}" -> workflow_def
 
 effect_op: "operation" NAME "(" param_list ")" "->" type_ref ";"
 
@@ -101,6 +104,7 @@ class ComponentSpec:
     functions: List[FunctionSpec] = field(default_factory=list)
     invariants: List[str] = field(default_factory=list)
     constraints: List[str] = field(default_factory=list)
+    workflows: List[WorkflowSpec] = field(default_factory=list) # Add support for nested workflows
 
 @dataclass
 class SystemSpec:
@@ -144,11 +148,16 @@ class AISpecTransformer(Transformer):
                 spec.states.append(item)
             elif isinstance(item, FunctionSpec):
                 spec.functions.append(item)
+            elif isinstance(item, WorkflowSpec):
+                spec.workflows.append(item)
             elif isinstance(item, tuple) and item[0] == 'invariant':
                 spec.invariants.append(item[1])
             elif isinstance(item, tuple) and item[0] == 'constraint':
                 spec.constraints.append(item[1])
         return spec
+    
+    def component_decl(self, items):
+        return ComponentSpec(name=items[0].value)
 
     def effect_block(self, items):
         name = items[0].value

@@ -1,0 +1,17 @@
+system: CoachingAgent
+component: Coach
+tests:
+  - name: test_standard_success_case
+    function: provide_feedback
+    input: {performance_score: 85}
+    expected: "Great job! Keep up the good work!"
+
+  - name: test_edge_case_low_score
+    function: provide_feedback
+    input: {performance_score: 39}
+    expected: "It looks like you need some extra practice. Let's go over this again."
+
+  - name: test_workflow_case_multiple_steps
+    function: generate_training_plan
+    input: {current_level: 'Beginner', target_level: 'Intermediate'}
+    expected: "Step"

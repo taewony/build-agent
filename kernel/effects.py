@@ -54,6 +54,23 @@ class MathOperation:
 class Math(Effect[float]):
     payload: MathOperation
 
+# --- User Interaction Effects (Level 3) ---
+@dataclass
+class UserInput:
+    prompt: Optional[str] = None
+
+@dataclass
+class Listen(Effect[str]):
+    payload: UserInput
+
+@dataclass
+class UserOutput:
+    message: str
+
+@dataclass
+class Reply(Effect[str]):
+    payload: UserOutput
+
 # --- Agent Control Effects ---
 @dataclass
 class SubTask:
