@@ -1,6 +1,6 @@
 from typing import Any, List, Dict
 from dataclasses import dataclass
-from semantic_kernel import Agent, Effect, Handler
+from .semantic_kernel import Agent, Effect, Handler
 
 class Runtime:
     """

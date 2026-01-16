@@ -1,0 +1,21 @@
+system: CalculatorSystem
+component: Calculator
+tests:
+  - name: test_addition
+    function: add
+    input: {a: 5, b: 3}
+    expected: 8
+
+  - name: test_division_by_zero
+    function: divide
+    input: {a: 10, b: 0}
+    expected: "Division by zero is not allowed"
+
+  - name: test_multiplication_and_subtraction
+    function: multiply
+    input: {a: 4, b: 3}
+    expected: 12
+
+    function: subtract
+    input: {a: 15, b: 7}
+    expected: 8

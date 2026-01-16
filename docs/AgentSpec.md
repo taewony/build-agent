@@ -315,7 +315,7 @@ AgentSpec v0.2 provides a formal yet flexible language for modeling agent semant
 
 ## C.4 Distribution
 *   **Package Structure:**
-    *   `sbak-kernel`: The runtime and effect system.
-    *   `sbak-compiler`: The Lark parser and codegen.
-    *   `sbak-cli`: The REPL and build tools.
-*   **Self-Hosting:** The ultimate test is defining `SPEC.sbak.md` and having the current implementation rebuild parts of itself.
+    *   `spak-kernel`: The runtime and effect system.
+    *   `spak-compiler`: The Lark parser and codegen.
+    *   `spak-cli`: The REPL and build tools.
+*   **Self-Hosting:** The ultimate test is defining `SPEC.spak.md` and having the current implementation rebuild parts of itself.

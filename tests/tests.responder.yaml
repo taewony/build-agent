@@ -1,0 +1,17 @@
+system: StaticResponder
+component: Responder
+tests:
+  - name: test_standard_success_case
+    function: reply
+    input: {query: "Hello, World!"}
+    expected: "Hello, World!"
+  
+  - name: test_edge_case_empty_message
+    function: reply
+    input: {query: ""}
+    expected: ""
+  
+  - name: test_workflow_case_multiple_steps
+    function: reply
+    input: {query: "Step 1"}
+    expected: "Step 2"

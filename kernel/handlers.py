@@ -4,7 +4,7 @@ import sys
 import litellm
 from typing import Dict, Any, Optional
 from .semantic_kernel import Handler, Effect
-from .effects import Generate, ExecuteCode, ReadFile, WriteFile, Recurse, LLMRequest
+from .effects import Generate, ExecuteCode, ReadFile, WriteFile, Recurse, LLMRequest, Math
 
 # Safe Execution Imports (from recursive-llm wisdom)
 from RestrictedPython import compile_restricted_exec, safe_globals, limited_builtins, utility_builtins
@@ -92,4 +92,17 @@ class FileSystemHandler(Handler):
             with open(effect.payload.path, 'w', encoding='utf-8') as f:
                 f.write(effect.payload.content)
             return None
+        raise NotImplementedError
+
+class MathHandler(Handler):
+    def handle(self, effect: Effect) -> Any:
+        if isinstance(effect, Math):
+            op = effect.payload.op
+            a = effect.payload.a
+            b = effect.payload.b
+            if op == "add": return a + b
+            if op == "sub": return a - b
+            if op == "mul": return a * b
+            if op == "div": return a / b if b != 0 else float('inf')
+            raise ValueError(f"Unknown operation: {op}")
         raise NotImplementedError

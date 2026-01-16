@@ -1,0 +1,22 @@
+system: CalculatorAgent
+component: Solver
+tests:
+  - name: test_addition
+    function: calculate
+    input: {op: "add", a: 5, b: 3}
+    expected: 8.0
+
+  - name: test_subtraction
+    function: calculate
+    input: {op: "sub", a: 10, b: 4}
+    expected: 6.0
+
+  - name: test_multiplication
+    function: calculate
+    input: {op: "mul", a: 4, b: 6}
+    expected: 24.0
+
+  - name: test_division
+    function: calculate
+    input: {op: "div", a: 10, b: 2}
+    expected: 5.0

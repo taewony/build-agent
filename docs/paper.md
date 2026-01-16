@@ -1,78 +1,80 @@
-# Research Potential Analysis & Roadmap
+# SPAK: A Spec-Driven Programmable Agent Kernel for AI Engineering Education
 
-## 1. Value Proposition (Publishability)
+## 1. Value Proposition (Educational & Foundational)
 
-**Conclusion: High Potential**
+**Conclusion: High Impact for AI Engineering Pedagogy**
 
-Most current Agent research focuses on "Performance" (e.g., SWE-bench scores). This project addresses **"Correctness & Safety"** through Architecture & Process, tackling the critical issues of **Reliability** and **Controllability** in AI Software Engineering (AI4SE). This makes it highly relevant for top-tier conferences like ICSE, FSE, ASE, and NeurIPS.
+While most agent research focuses on performance metrics (e.g., SWE-bench), **SPAK (Spec-Driven Programmable Agent Kernel)** addresses the **structural complexity** and **learnability** of agentic systems. By shifting the focus from "Prompt Engineering" to **"Agent Engineering"**, SPAK provides a framework where agents are built as verifiable, formal artifacts.
 
 **Key Contributions:**
-1.  **Formal-Spec Driven Synthesis:** A **Neuro-Symbolic approach** controlling LLM output via **Semantic IR (AISpec)**, not just prompts.
-2.  **Kernel Architecture:** Managing side-effects via an **Algebraic Effect-based Runtime**, treating agents as controllable software rather than black-box scripts.
-3.  **Recursive Verification:** A **Fractal Design Pattern** utilizing a "Spec → Code → Verify → Refine" loop to reliably build complex systems.
+1.  **Formal-Spec Driven Synthesis:** A neuro-symbolic approach where Large Language Models (LLMs) are constrained by **Semantic IR (AISpec)**.
+2.  **Category Theory Foundation:** Agents are formalized as **Endofunctors on Semantic Categories**, providing a rigorous mathematical backbone for agent behavior.
+3.  **Educational Path (Agent Maturity Levels):** A curriculum-based approach that allows developers to learn agent construction by gradually increasing specification complexity (from Level 0 to Level 5).
+4.  **Algebraic Effect Runtime:** Separation of **Policy** (LLM decision) and **Runtime** (side effects), ensuring safety and observability.
 
 ---
 
-## 2. Analysis of Prior Art
+## 2. Formal Semantics: Agent as Endofunctor
 
-### A. Multi-Agent Frameworks (Structured Collaboration)
-*   **Examples:** **MetaGPT** (ICLR 2024), **ChatDev** (ACL 2024)
-*   **Concept:** Waterfall development using SOPs defined in natural language prompts.
-*   **The Gap:** They define processes in **Natural Language (Prompt)**; we define them in **Formal DSL (Lark)** for machine verification. They focus on "Collaboration"; we focus on "**Kernel-Level Control (Runtime Safety)**".
+SPAK reframes agent execution as a trajectory through a **Semantic State Space**.
 
-### B. Self-Correction & Verification
-*   **Examples:** **Reflexion** (NeurIPS 2023), **LDB**, **Clover** (2024)
-*   **Concept:** Self-repair loops based on execution traces or error logs.
-*   **The Gap:** Existing work mainly checks **Unit Tests**. We combine **Structural Verification (Static Analysis)** with **Behavioral Verification**, checking compliance with **Semantic IR**. We verify "Design Intent," not just "Test Pass."
-
-### C. Formal Methods + LLM
-*   **Examples:** **Spec-to-Code** (Microsoft Research), **Baldur** (2023)
-*   **Concept:** Generating/Verifying mathematical proofs or formal specs (Dafny, Coq).
-*   **The Gap:** Traditional formal methods are too academic. We propose **"Practical Formalism"** using **"Nix-style"** practical specs (YAML/Markdown) accessible to engineers.
+*   **Semantic Category ($\\mathcal{C}$):** Defined by the `system` and its `state` objects.
+*   **Morphism ($f: S \to S'$):** Defined by `function` blocks, representing pure semantic transitions.
+*   **Endofunctor ($F: \\mathcal{C} \to \\mathcal{C}$):** The agent itself, which iteratively applies morphisms to transform its internal state.
+*   **Algebraic Effects:** Managed interactions with the external world (LLM, IO), yielding "requests" to the Kernel rather than direct mutations.
 
 ---
 
-## 3. Positioning & Titles
+## 3. The Agent Maturity Framework (Evaluation)
 
-**Target Venues:** Software Engineering (SE) conferences or AI Systems tracks.
+To evaluate the efficacy of the spec-driven approach, we propose an **Agent Curriculum** based on maturity levels. This serves as our primary qualitative and quantitative benchmark.
 
-**Proposed Title 1 (System-focused):**
-> **"SBAK: A Formally Verified, Spec-Driven Kernel for Recursive AI Software Synthesis"**
+| Level | Name | Semantic Construct | SPAK Implementation Status |
+| :--- | :--- | :--- | :--- |
+| **0** | **Static Responder** | `function` (Input $\\to$ Output) | ✅ **Completed** |
+| **1** | **Context-Aware Bot** | `state` (History/Memory) | ✅ **Completed** |
+| **2** | **Tool-Use Agent** | `effect` (External API/REPL) | 🚧 In Progress |
+| **3** | **Planning Agent** | `workflow` (Loop/Condition) | 📅 Planned |
+| **4** | **Multi-Agent System**| `composition` (Shared Space) | 📅 Planned |
+| **5** | **Self-Improving** | `meta-build` (Self-Recursion) | 📅 Planned |
 
-**Proposed Title 2 (Methodology-focused):**
-> **"Programming Agents with Specs: Bridging the Gap between Natural Intent and Reliable Execution via Algebraic Effects"**
-
----
-
-## 4. Research Roadmap
-
-### Step 1: Quantitative Evaluation (Benchmarks)
-*   Compare success rates on **SWE-bench** or **HumanEval** using our Spec → Code loop vs. Zero-shot LLM.
-*   **Claim:** "Spec-driven verification improves success rate by XX% over raw LLM generation."
-
-### Step 2: Qualitative Evaluation (Reliability)
-*   **Side-effect Isolation:** Demonstrate 100% prevention/mocking of destructive actions via Algebraic Effects.
-*   **Replayability:** Prove **Deterministic** behavior by passing the same verification vectors on repeated runs.
-
-### Step 3: Ablation Study
-*   Performance with vs. without the Verifier.
-*   Code quality comparison: Description-only vs. Formal Spec.
+### Preliminary Results (Level 0-1)
+We successfully demonstrated that the SPAK **Builder** can synthesize Python code from a minimal `AgentSpec` for Level 0 and 1. The **Verifier** successfully caught argument mismatches in generated tests, triggering a **Self-Repair** cycle that converged on a correct implementation.
 
 ---
 
-## 5. Draft Abstract (Target: ICSE)
+## 4. Analysis of Prior Art (Refined)
 
-### **Title: SBAK: A Formally Verified, Spec-Driven Agent Kernel for Recursive AI Software Synthesis**
-#### (재귀적 AI 소프트웨어 합성을 위한 형식 검증된 명세 기반 Agent 커널)
+### A. Process-Oriented vs. Kernel-Oriented
+*   **MetaGPT/ChatDev:** Focus on human-like social orchestration (SOPs).
+*   **SPAK:** Focus on **Machine-Verifiable Constraints**. We define the *Kernel* (OS) first, then the *Agent* (Process).
 
-**Abstract:**
-The rapid advancement of Large Language Models (LLMs) has enabled autonomous software generation, yet current agentic frameworks often suffer from non-determinism, lack of interpretability, and uncontrolled side effects. Existing approaches predominantly rely on prompt engineering or social orchestration (multi-agent chat), which fails to guarantee adherence to rigorous architectural constraints or functional correctness beyond simple unit tests.
+### B. Unit Testing vs. Formal Invariants
+*   **Reflexion:** Uses unit tests for feedback.
+*   **SPAK:** Uses **Hoare-logic style invariants** and **Semantic IR matching** in addition to unit tests, ensuring structural integrity before execution.
 
-In this paper, we introduce the **Spec-Driven Build-Agent Kernel (SBAK)**, a novel architecture that treats AI software synthesis as a formal compilation process rather than probabilistic text generation. SBAK introduces three key innovations: (1) **Semantic Intermediate Representation (AISpec)**, a domain-specific language (DSL) that formalizes agent intent, interfaces, and invariants separate from implementation; (2) an **Algebraic Effect-based Runtime Kernel**, which isolates the agent's decision-making policy from execution, ensuring complete observability and safety of side effects; and (3) a **Recursive Verification Loop**, where agents self-correct by iteratively refining code against language-agnostic test vectors and static structural analysis.
+---
 
-We evaluate SBAK on a suite of complex software engineering tasks, demonstrating that our spec-driven approach significantly outperforms standard zero-shot and chain-of-thought methods in generating structurally correct and secure code. Furthermore, we show that our kernel's recursive architecture allows for the deterministic synthesis of complex, hierarchical systems, effectively bridging the gap between natural language intent and reliable, verifiable software execution. Our work proposes a shift from "prompting agents" to "programming agent kernels," offering a foundation for the next generation of reliable AI-assisted software engineering.
+## 5. Positioning & Target Venues
 
-  The abstract highlights the three key innovations:
-   1. Semantic Intermediate Representation (AISpec)
-   2. Algebraic Effect-based Runtime Kernel
-   3. Recursive Verification Loop
+**Proposed Title:**
+> **"SPAK: A Formally Verified, Spec-Driven Kernel for Curriculum-Based AI Agent Synthesis"**
+
+**Target Venues:**
+*   **KAIS** (Knowledge-Based Systems)
+*   **ICSE** (International Conference on Software Engineering - SE Education track)
+*   **ASE** (Automated Software Engineering)
+
+---
+
+## 6. Appendix: AgentSpec Grammar v0.4
+
+```ebnf
+AgentSpec ::= MetaDef SystemDef
+SystemDef ::= "system" Name "{" ComponentDef* "}"
+ComponentDef ::= "component" Name "{" MemberDef* "}"
+MemberDef ::= "state" Name "{" Field* "}"
+            | "function" Name "(" Params ")" "->" Type "{" Body "}"
+            | "invariant" StringLiteral
+```
+

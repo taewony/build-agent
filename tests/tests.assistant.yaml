@@ -1,0 +1,17 @@
+system: ContextBot
+component: Assistant
+tests:
+  - name: test_standard_success
+    function: chat
+    input: {message: "Hello, how can I assist you today?"}
+    expected: "I am here to help! What can I do for you?"
+  
+  - name: test_edge_case_empty_input
+    function: chat
+    input: {message: ""}
+    expected: "Please provide a message."
+  
+  - name: test_workflow_case_complex_query
+    function: chat
+    input: {message: "What is the capital of Peru?"}
+    expected: "The capital of Peru is Lima."

@@ -16,7 +16,6 @@ class Generate(Effect[str]):
 
 # --- REPL Effects ---
 @dataclass
-@dataclass
 class CodeExecution:
     code: str
     timeout: int = 5
@@ -43,6 +42,17 @@ class FileWrite:
 @dataclass
 class WriteFile(Effect[None]):
     payload: FileWrite
+
+# --- Math Effects (Level 2) ---
+@dataclass
+class MathOperation:
+    op: str # "add", "sub", "mul", "div"
+    a: float
+    b: float
+
+@dataclass
+class Math(Effect[float]):
+    payload: MathOperation
 
 # --- Agent Control Effects ---
 @dataclass

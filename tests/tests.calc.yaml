@@ -1,0 +1,24 @@
+system: CalculatorSystem
+component: Calculator
+tests:
+  - name: test_addition
+    function: add
+    input: {a: 10.5, b: 5.5}
+    expected: 16.0
+
+  - name: test_division
+    function: divide
+    input: {a: 10.0, b: 2.0}
+    expected: 5.0
+
+  - name: test_division_by_zero
+    function: divide
+    input: {a: 5.0, b: 0.0}
+    expected: { error: "Division by zero is not allowed" }
+
+  - name: test_history_tracking
+    workflow:
+      - { function: clear }
+      - { function: add, input: {a: 1, b: 2} }
+      - { function: get_history }
+    expected: ["1.0 + 2.0 = 3.0"]
