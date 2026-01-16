@@ -1,0 +1,7 @@
+system: MetaSolver
+component: Orchestrator
+tests:
+  - name: test_recursion_success
+    function: solve_big_problem
+    input: {problem: "Calculate the area of a square with side 5 (Wait, logic is hardcoded to 25*4)"}
+    expected: "Solved: 100.0"

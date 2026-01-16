@@ -35,8 +35,8 @@ To evaluate the efficacy of the spec-driven approach, we propose an **Agent Curr
 | **1** | **Context-Aware Bot** | `state` (History/Memory) | ✅ **Completed** |
 | **2** | **Tool-Use Agent** | `effect` (External API/REPL) | 🚧 In Progress |
 | **3** | **Planning Agent** | `workflow` (Loop/Condition) | ✅ **Completed** |
-| **4** | **Multi-Agent System**| `composition` (Shared Space) | 📅 Planned |
-| **5** | **Self-Improving** | `meta-build` (Self-Recursion) | 📅 Planned |
+| **4** | **Multi-Agent System**| `composition` (Shared Space) | ✅ **Completed** |
+| **5** | **Self-Improving** | `meta-build` (Self-Recursion) | ✅ **Completed** |
 
 ### Preliminary Results (Level 0-1)
 We successfully demonstrated that the SPAK **Builder** can synthesize Python code from a minimal `AgentSpec` for Level 0 and 1. The **Verifier** successfully caught argument mismatches in generated tests, triggering a **Self-Repair** cycle that converged on a correct implementation.

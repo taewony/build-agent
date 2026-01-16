@@ -71,6 +71,17 @@ class UserOutput:
 class Reply(Effect[str]):
     payload: UserOutput
 
+# --- Message Bus Effects (Level 4) ---
+@dataclass
+class Message:
+    recipient: Optional[str]
+    content: str
+    broadcast: bool = False
+
+@dataclass
+class SendMessage(Effect[str]):
+    payload: Message
+
 # --- Agent Control Effects ---
 @dataclass
 class SubTask:

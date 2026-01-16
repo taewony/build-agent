@@ -56,9 +56,12 @@ STRING: /"[^"]*"/
 %import common.WS
 %import common.CPP_COMMENT 
 %import common.C_COMMENT
+%import common.SH_COMMENT
+
 %ignore WS
 %ignore CPP_COMMENT
 %ignore C_COMMENT
+%ignore SH_COMMENT
 """
 
 # --- AST Nodes ---

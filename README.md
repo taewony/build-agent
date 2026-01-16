@@ -1,33 +1,61 @@
-# Meta Build-Agent Kernel (MBAK)
-## to specify and build the Build-Agent itself and build other domain agent
-**"A Formal Spec-Driven, Recursively Self-Improving Agent Kernel"**
+# SPAK: Spec-Driven Programmable Agent Kernel
+## The Operating System for Agentic AI Education
 
-This project implements a **Programmable and Verifiable Agent Kernel**. Unlike traditional agent frameworks that focus on "orchestration" (chaining prompts), this system focuses on **"Correctness & Synthesis"**. It treats Agent Logic as an artifact that must be **compiled from a formal specification (AISpec)**, **verified against test vectors**, and **executed within an effect-isolated runtime**.
+**"From Prompting to Programming: A Formal Kernel for Verifiable Agents"**
 
-## 🏗 Core Definition
+SPAK is a **Programmable Agent Kernel** designed to teach and enforce rigorous engineering practices in AI Agent development. Unlike frameworks that focus on "chaining prompts," SPAK treats Agent Logic as a formal artifact that must be **compiled from a Specification (AgentSpec)**, **verified against Invariants**, and **executed within an Effect-Isolated Runtime**.
 
-> **"It is like Terraform for AI Agents, but instead of cloud infrastructure, it manages Software Logic."**
-
-The system operates on three fundamental pillars:
-
-1.  **Compiler, Not Interpreter:** It "compiles" a **Formal Spec (`SPEC.md`)** into an **Executable Agent (`src/*.py`)** using an LLM as the code generator.
-2.  **Effect-Isolated Runtime:** It separates **Policy** (Decision) from **Runtime** (Execution) using **Algebraic Effects**. Agents yield intents; the Kernel handles them.
-3.  **Recursive Fractal Design:** The system is capable of building itself. A "Build Agent" can define a sub-spec, spawn a "Sub-Build Agent" to implement it, verify it, and merge it back.
+This project serves as a reference implementation for **"Agent Engineering"** as an academic discipline, providing a structured curriculum from simple functions to recursive, self-improving systems.
 
 ---
 
-## 📚 Terminology & Concepts
+## 🏗 Core Architecture
 
-### 1. The "Inside vs. Outside" Architecture
+> **"An Agent is an Endofunctor on a Semantic Category."**
 
-This system is designed to bridge the gap between High-Level Intent and Low-Level Execution.
+SPAK operates on three fundamental pillars:
 
-| Realm | **Outside the System** | **Inside the System** |
-| :--- | :--- | :--- |
-| **Agent** | **The Architect** | **The Contractor** |
-| **Intelligence** | Frontier Models (GPT-4o, Claude 3.5) + Humans | Local Models (Llama 3, Gemma 2, Qwen 2.5) |
-| **Role** | Define **Specs** and **Constraints**. | Implement Logic, Fix Bugs, Pass Tests. |
-| **Artifact** | `SPEC.*.md`, `tests.*.yaml` | `src/*.py`, `build/*.html`, `trace.json` |
+1.  **Semantic Specification (AgentSpec):** A Domain-Specific Language (DSL) that defines the agent's **State Space** (Category) and **Transitions** (Morphisms), not just its prompts.
+2.  **Algebraic Effect Runtime:** Separates **Policy** (LLM Decisions) from **Mechanism** (IO/Tools). The Agent *requests* an effect; the Kernel *decides* how to handle it (Execute, Mock, or Deny).
+3.  **Recursive Fractal Design:** The system is capable of infinite scalability via **Recursive Sub-Kernels**. A parent agent can spawn an isolated child agent to solve a sub-problem with a fresh context window.
+
+---
+
+## 📚 The Agent Curriculum (Maturity Levels)
+
+SPAK implements a graded curriculum to demonstrate the evolution of agent complexity. All levels are implemented and verifiable in this repository.
+
+| Level | Agent Type | Key Concept | Spec File | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **0** | **Static Responder** | Input $\to$ Output | `specs/SPEC.level0.md` | ✅ Ready |
+| **1** | **Context-Aware Bot** | State Persistence | `specs/SPEC.level1.md` | ✅ Ready |
+| **2** | **Tool-Use Agent** | Algebraic Effects (Math) | `specs/SPEC.level2.md` | ✅ Ready |
+| **3** | **Planning Agent** | Workflows (Loops) | `specs/SPEC.level3.md` | ✅ Ready |
+| **4** | **Multi-Agent System** | Collaboration (MsgBus) | `specs/SPEC.level4.md` | ✅ Ready |
+| **5** | **Recursive Solver** | Isolation (Sub-Kernel) | `specs/SPEC.level5.md` | ✅ Ready |
+
+### Understanding Agent Maturity
+
+The levels below define the pedagogical path from simple prompt-based automation to advanced autonomous systems:
+
+*   **Level 0: Stimulus-Response (Capability: Pure Functions)**
+    The agent maps a single input to a single output. It has no memory and no side effects.
+    *   *Concept:* **Morphism** - A transformation between states.
+*   **Level 1: Context-Aware (Capability: State Management)**
+    The agent remembers previous turns. It can maintain a conversation history or an internal mental model.
+    *   *Concept:* **Objects** - Immutable snapshots of semantic state.
+*   **Level 2: Tool-Enabled (Capability: Algebraic Effects)**
+    The agent can interact with the external world (Calculators, Search APIs, File Systems) via explicit, kernel-mediated requests.
+    *   *Concept:* **Side-Effect Isolation** - Decoupling logic from execution.
+*   **Level 3: Goal-Oriented (Capability: Workflows)**
+    The agent can plan multiple steps, use loops, and self-correct based on feedback.
+    *   *Concept:* **Endofunctor** - A mapping that preserves the structure of the semantic category while iterating.
+*   **Level 4: Collaborative (Capability: Multi-Agent Systems)**
+    Multiple specialized components (e.g., Manager and Worker) communicate through a shared Message Bus to achieve a complex goal.
+    *   *Concept:* **Category Composition** - Building complex systems from simpler, verified components.
+*   **Level 5: Recursive (Capability: Fractal Scalability)**
+    The "Holy Grail." Agents can spawn entirely new Kernel instances (Sub-Kernels). This bypasses LLM context limits and ensures fault-tolerant isolation.
+    *   *Concept:* **Recursive Kernel** - The ability of the system to define and run instances of itself.
 
 ---
 
@@ -36,53 +64,90 @@ This system is designed to bridge the gap between High-Level Intent and Low-Leve
 The system runs a **REPL-driven Build Loop**:
 
 ```bash
-# Start the Kernel Shell (Main Entry Point)
+# 1. Start the Kernel Shell
 $ python spak.py
 
-# 1. Load a Specification (The Blueprint)
-(kernel) > load specs/SPEC.spak.md
-[Kernel] Loaded System: SPAK_Kernel
+# 2. Load a Specification (e.g., Level 3 Planning Agent)
+(kernel) > load specs/SPEC.level3.md
+[Kernel] Loaded System: CoachingAgent
 
-# 2. Verify Structural Integrity
-(kernel) > verify kernel
-[Static Analysis] Starting verification for system: SPAK_Kernel
-...
-[Result] Verification PASSED.
-
-# 3. Auto-Implement (The Build)
+# 3. Auto-Implement (The Builder Agent synthesizes code from Spec)
 (kernel) > build
-[Builder] Generating code for 'Header' using Local LLM... Done.
+[Builder] Generating tests for 'Coach'...
+[Builder] Synthesizing implementation for 'Coach'...
+✅ Synthesized src/coach.py
 
-# 4. Verify Behavior (The Test)
-(kernel) > verify behavior
-[Pytest] test_header_rendering ... PASS
+# 4. Verify Behavior (The Verifier runs the tests)
+(kernel) > verify
+[Static Analysis] Starting verification for system: CoachingAgent
+[Dynamic Analysis] Running tests from: tests/tests.coach.yaml
+  🧪 Running test_standard_success... ✅ PASS
+  🧪 Running test_workflow_steps... ✅ PASS
+[Result] Verification PASSED.
 ```
 
 ---
 
-## 🌍 Generic Application Domains
+## 🌍 Why "Kernel"?
 
-Because the system is "Spec In -> Artifact Out", it can apply to almost anything:
+In Computer Science, a **Kernel** manages resources, provides abstraction, and enforces isolation. SPAK does exactly this for Agents:
 
-| Domain | Spec (AISpec) | Artifact | Verification |
-| :--- | :--- | :--- | :--- |
-| **Web Dev** | UI Component / User Flow | HTML / React / Vue | Playwright / Storybook / Lighthouse |
-| **Data Eng** | Schema / Pipeline Logic | SQL / Airflow DAGs | Data Quality Tests (GreatExpectations) |
-| **DevOps** | Infrastructure State | Terraform / K8s Manifests | terraform plan / Policy-as-Code (OPA) |
-| **Research** | Experiment Protocol | Python / Jupyter Notebook | Statistical Significance Check |
-
-### Conclusion: The Build-Agent is generic.
-
-By defining the system as **"Programmable and Verifiable"**, you can use it as a **"Universal Agent Factory"**.
+1.  **Resource Management:** Manages the **Context Window** as a scarce resource (via Recursion/Memory).
+2.  **Isolation:** Protects the host system by sandboxing **Effect Execution** (e.g., `SafeREPLHandler`).
+3.  **Abstraction:** Provides a standard Syscall interface (`perform Effect`) for LLMs, replacing fragile prompt engineering.
 
 ---
 
-## Appendix: Why "Kernel"?
 
-컴퓨터 과학에서 **커널(Kernel)**이라고 부르기 위해서는 자원 관리 및 추상화, 격리 및 보호, 스케줄링 및 제어 기능을 수행해야 합니다.
 
-1.  **자원 관리 (LLM as Resource):** 에이전트는 직접 LLM을 호출하지 않고 커널에 요청합니다.
-2.  **격리 및 보호 (Isolation):** 에이전트의 논리와 실제 시스템 실행을 분리하여 안전을 보장합니다.
-3.  **제어 (Algebraic Effects):** `perform(WriteFile)` 같은 시스템 콜(Syscall) 인터페이스를 제공합니다.
+## 📚 References & Pedagogical Roots
 
-우리는 에이전트를 위한 운영체제(OS)의 핵심부를 구축하고 있습니다.
+
+
+SPAK is inspired by and expands upon the foundational concepts found in the **[ML105: Agentic AI](https://github.com/rdali/ML105_Agents)** curriculum. 
+
+
+
+### Comparison: ML105 vs. SPAK
+
+
+
+While ML105 provides an excellent introduction to building agents using standard libraries (LangChain, Bedrock), SPAK reframes these lessons into a formal **Agent Engineering** framework:
+
+
+
+| ML105 Stage | SPAK Maturity Level | Enhancement in SPAK |
+
+| :--- | :--- | :--- |
+
+| `1-llm_call.py` | **Level 0 (Morphism)** | Defined via formal `function` in `AgentSpec`. |
+
+| `3-agent_simple.py` | **Level 2 (Effects)** | Tools are **Algebraic Effects** mediated by the Kernel. |
+
+| `4-agent_memory.py` | **Level 1 (State)** | Memory is modeled as an **Immutable Semantic State**. |
+
+| `7-architecture.ipynb`| **Level 4 (Collaboration)**| Uses a formal **Message Bus** effect for inter-agent comms. |
+
+| (README Loop) | **Level 3 (Workflow)** | Expressed as **Turing-complete workflows** in the Spec. |
+
+| (N/A) | **Level 5 (Recursion)** | SPAK introduces **Recursive Sub-Kernels** for infinite scaling. |
+
+
+
+By moving from "scripts" to "specs," SPAK ensures that every stage of the agent's evolution is verifiable, replayable, and architecturally sound.
+It can be positioned as a next-generation **"Universal Agent Factory"** for both education and production engineering.
+
+
+---
+
+
+
+## 📝 Citation
+
+
+
+If you use SPAK for research or education, please cite:
+
+
+
+> **"SPAK: A Formally Verified, Spec-Driven Kernel for Curriculum-Based AI Agent Synthesis"** (Draft, 2026)

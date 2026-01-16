@@ -29,7 +29,7 @@
     - **Level 1 (Context):** Implement `ContextAwareBot` (State: History).
     - **Level 2 (Tool Use):** Implement `CalculatorAgent` (Effect: ToolCall). ✅ **Completed**
     - **Level 3 (Planning):** Implement `CoachingAgent` (Workflow: Plan -> Act). ✅ **Completed**
-    - **Level 4 (Multi-Agent):** Implement `TeamCoordinator` (System composition).
+    - **Level 5 (Recursive):** Implement `MetaSolver` (System recursion). ✅ **Completed** (Runtime Isolation)
 - **Paper Argument:** "SPAK allows students to transition from Level N to N+1 by simply adding semantic constructs (e.g., adding `state` or `effects`) to the spec, whereas traditional coding requires massive refactoring."
 
 #### 3. [ ] Cost & Benefit Analysis

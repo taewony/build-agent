@@ -1,0 +1,12 @@
+system: ProjectTeam
+component: Worker
+tests:
+  - name: test_standard_success_case
+    function: do_work
+    input: {task: 'valid_task'}
+    expected: 'valid_task'
+  
+  - name: test_edge_case_empty_input
+    function: do_work
+    input: {task: ''}
+    expected: 'empty_list_error'

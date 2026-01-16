@@ -1,0 +1,22 @@
+system: ProjectTeam
+component: Manager
+tests:
+  - name: test_add_team_member_success
+    function: add_team_member
+    input: {member_name: "Alice", role: "Developer"}
+    expected: "Member Alice added as Developer"
+
+  - name: test_add_team_member_empty_role
+    function: add_team_member
+    input: {member_name: "Bob", role: ""}
+    expected: "Error: Role cannot be empty"
+
+  - name: test_setup_charlie
+    function: add_team_member
+    input: {member_name: "Charlie", role: "Researcher"}
+    expected: "Member Charlie added as Researcher"
+
+  - name: test_assign_task_to_member
+    function: assign_task
+    input: {task: "Fix bug", member_name: "Charlie"}
+    expected: "Task 'Fix bug' assigned to Charlie"
